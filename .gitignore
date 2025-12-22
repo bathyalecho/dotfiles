@@ -1,0 +1,6 @@
+# Neovim
+nvim/plugin/
+nvim/.luarc.json
+
+# OS files
+.DS_Store
