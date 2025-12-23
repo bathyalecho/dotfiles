@@ -1,6 +1,13 @@
 -- Terminal mode: use Esc to exit to normal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
+-- Enable built-in tree-sitter highlighting
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
