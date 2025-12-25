@@ -51,18 +51,14 @@ return {
     end,
   },
 
-  -- LSP
+  -- LSP (using native Neovim 0.11+ API)
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-    },
+    "hrsh7th/cmp-nvim-lsp",
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- Python (pyright)
-      lspconfig.pyright.setup({
+      vim.lsp.config("pyright", {
         capabilities = capabilities,
         settings = {
           python = {
@@ -76,19 +72,22 @@ return {
       })
 
       -- HTML
-      lspconfig.html.setup({
+      vim.lsp.config("html", {
         capabilities = capabilities,
       })
 
       -- CSS
-      lspconfig.cssls.setup({
+      vim.lsp.config("cssls", {
         capabilities = capabilities,
       })
 
       -- JavaScript/TypeScript
-      lspconfig.ts_ls.setup({
+      vim.lsp.config("ts_ls", {
         capabilities = capabilities,
       })
+
+      -- Enable all configured LSP servers
+      vim.lsp.enable({ "pyright", "html", "cssls", "ts_ls" })
 
       -- LSP keymaps
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
