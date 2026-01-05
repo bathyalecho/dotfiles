@@ -158,7 +158,7 @@ return {
   },
 
 {
-    'bathyalecho/nvim-strudel',
+    'Goshujinsama/nvim-strudel',
     ft = 'strudel',
     build = 'cd server && npm install && npm run build',
     keys = {
