@@ -268,7 +268,7 @@ return {
         "vim",
         "yaml",
 	"sql",
-	"c++",
+	"cpp",
       })
 
       -- Enable treesitter-based indentation (except for julia)
