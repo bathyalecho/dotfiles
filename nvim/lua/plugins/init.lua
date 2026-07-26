@@ -20,12 +20,15 @@ return {
         on_attach = function(bufnr)
           local api = require("nvim-tree.api")
           api.config.mappings.default_on_attach(bufnr)
+
+          vim.keymap.set('n', '<leader>t', function()
+            local node = api.tree.get_node_under_cursor()
+            local path = node.type == "directory" and node.absolute_path or vim.fn.fnamemodify(node.absolute_path, ":h")
+            vim.cmd("split | lcd " .. vim.fn.fnameescape(path) .. " | terminal")
+          end, { buffer = bufnr, desc = "Open terminal in directory" })
         end,
       })
       vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
-      vim.keymap.set('n', '<leader>t', function()
-        vim.cmd("split | terminal | lcd " .. vim.fn.fnameescape(vim.fn.getcwd()))
-      end, { desc = "Open terminal in current directory" })
     end,
   },
 
